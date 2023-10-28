@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   createAuthUserWithEmailAndPassword,
-  creatUserDocumentFromAuth,
+  createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
@@ -30,7 +30,9 @@ const SignUpForm = () => {
         email,
         password
       );
-      const userDocRef = await creatUserDocumentFromAuth(user, { displayName });
+      const userDocRef = await createUserDocumentFromAuth(user, {
+        displayName,
+      });
       resetFormFields();
     } catch (error) {
       alert(error, error.code);
@@ -42,8 +44,9 @@ const SignUpForm = () => {
     setFormField({ ...formField, [name]: value });
   };
   return (
-    <div>
-      <h1>Sign Up with Email & Password</h1>
+    <div className="sign-up-container">
+      <h2> Don't have an account?</h2>
+      <span>Sign Up with Email & Password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           label="Display Name"
